@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports.sendReminderDaily = (event, context, callback) => {
+module.exports.sendReminderByRate = (event, context, callback) => {
 
     let AWS = require('aws-sdk');
-    AWS.config.update({region:'ap-southeast-1'});
+    AWS.config.update({region:'us-east-1'});
     let ses = new AWS.SES();
     let fs = require('fs');
 
-    let emailHtml = fs.readFileSync('./dailyReminder.html', 'utf-8');
+    let emailHtml = fs.readFileSync('./rateReminder.html', 'utf-8');
 
     let toAndFromAddress = 'shawn.zhang@razer.com';
     let params = {
@@ -42,7 +42,7 @@ module.exports.sendReminderDaily = (event, context, callback) => {
     });
 };
 
-module.exports.sendReminderWeekend = (event, context, callback) => {
+module.exports.sendReminderOnWeekend = (event, context, callback) => {
 
     let AWS = require('aws-sdk');
     AWS.config.update({region:'us-east-1'});
