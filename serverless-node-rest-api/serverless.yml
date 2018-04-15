@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-users-${opt:stage, self:provider.stage} # This is telling use the --stage CLI option. And if it does not, use the default stage specified by provider.stage
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -18,42 +18,42 @@ provider:
 
 functions:
   create:
-    handler: pets/create.create
+    handler: users/create.create
     events:
       - http:
-          path: pets
+          path: users
           method: post
           cors: true
 
   list:
-    handler: pets/list.list
+    handler: users/list.list
     events:
       - http:
-          path: pets
+          path: users
           method: get
           cors: true
 
   get:
-    handler: pets/get.get
+    handler: users/get.get
     events:
       - http:
-          path: pets/{id}
+          path: users/{id}
           method: get
           cors: true
 
   update:
-    handler: pets/update.update
+    handler: users/update.update
     events:
       - http:
-          path: pets/{id}
+          path: users/{id}
           method: put
           cors: true
 
   delete:
-    handler: pets/delete.delete
+    handler: users/delete.delete
     events:
       - http:
-          path: pets/{id}
+          path: users/{id}
           method: delete
           cors: true
 

@@ -8,7 +8,7 @@ const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-depe
 // - AWS Documentation
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports.delete = (event, context, callback) => {
+module.exports.get = (event, context, callback) => {
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Key: {
@@ -16,19 +16,19 @@ module.exports.delete = (event, context, callback) => {
     },
   };
 
-  // delete the pet from the database
-  dynamoDb.delete(params, (error) => {
+  // fetch pet from the database
+  dynamoDb.get(params, (error, result) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t remove the pet item.'));
+      callback(new Error('Couldn\'t fetch the user.'));
       return;
     }
 
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify({}),
+      body: JSON.stringify(result.Item),
     };
     callback(null, response);
   });

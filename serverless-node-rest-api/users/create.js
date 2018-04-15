@@ -12,9 +12,9 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
-  if (typeof data.petName !== 'string' || typeof data.petBreed !== 'string') {
+  if (typeof data.userName !== 'string' || typeof data.userEmail !== 'string') {
     console.error('Validation Failed');
-    callback(new Error('Couldn\'t create the pet item.'));
+    callback(new Error('Couldn\'t create the user.'));
     return;
   }
 
@@ -22,19 +22,19 @@ module.exports.create = (event, context, callback) => {
     TableName: process.env.DYNAMODB_TABLE,
     Item: {
       id: uuid.v1(),
-      petName: data.petName,
-      petBreed: data.petBreed,
-      createdAt: timestamp,
-      updatedAt: timestamp,
+        userName: data.userName,
+        userEmail: data.userEmail,
+        createdAt: timestamp,
+        updatedAt: timestamp,
     },
   };
 
-  // write the pet to the database
+  // write the user to the database
   dynamoDb.put(params, (error) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t create the pet item.'));
+      callback(new Error('Couldn\'t create the user.'));
       return;
     }
 

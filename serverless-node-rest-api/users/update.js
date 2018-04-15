@@ -13,7 +13,7 @@ module.exports.update = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
   // validation
-  if (typeof data.petName !== 'string' || typeof data.petBreed !== 'string') {
+  if (typeof data.userName !== 'string' || typeof data.userEmail !== 'string') {
     console.error('Validation Failed');
     callback(new Error('Couldn\'t update the todo item.'));
     return;
@@ -25,12 +25,12 @@ module.exports.update = (event, context, callback) => {
       id: event.pathParameters.id,
     },
     ExpressionAttributeValues: {
-      ':petName': data.petName,
-      ':petBreed': data.petBreed,
+      ':userName': data.userName,
+      ':userEmail': data.userEmail,
       ':checked': data.checked,
       ':updatedAt': timestamp,
     },
-    UpdateExpression: 'SET petName = :petName, petBreed = :petBreed, updatedAt = :updatedAt',
+    UpdateExpression: 'SET userName = :userName, userEmail = :userEmail, updatedAt = :updatedAt',
     ReturnValues: 'ALL_NEW',
   };
 
