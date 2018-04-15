@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports.sendReminderByRate = (event, context, callback) => {
+module.exports.sendEmailReminderByRate = (event, context, callback) => {
 
     let AWS = require('aws-sdk');
     AWS.config.update({region:'us-east-1'});
     let ses = new AWS.SES();
     let fs = require('fs');
 
-    let emailHtml = fs.readFileSync('./rateReminder.html', 'utf-8');
+    let emailHtml = fs.readFileSync('./emailReminderByRate.html', 'utf-8');
 
     let toAndFromAddress = 'shawn.zhang@razer.com';
     let params = {
@@ -22,12 +22,12 @@ module.exports.sendReminderByRate = (event, context, callback) => {
                 },
                 Text: {
                     Charset: "UTF-8",
-                    Data: "Remember to continue helping the Woof Garden in your Pluralsight course!"
+                    Data: "This is the message body in text format."
                 }
             },
             Subject: {
                 Charset: "UTF-8",
-                Data: "Woof Garden Reminder"
+                Data: "zVault Rate Reminder"
             }
         },
         ReplyToAddresses: [toAndFromAddress],
@@ -42,14 +42,14 @@ module.exports.sendReminderByRate = (event, context, callback) => {
     });
 };
 
-module.exports.sendReminderOnWeekend = (event, context, callback) => {
+module.exports.sendEmailReminderOnWeekend = (event, context, callback) => {
 
     let AWS = require('aws-sdk');
     AWS.config.update({region:'us-east-1'});
     let ses = new AWS.SES();
     let fs = require('fs');
 
-    let emailHtml = fs.readFileSync('./weekendReminder.html', 'utf-8');
+    let emailHtml = fs.readFileSync('./emailReminderOnWeekend.html', 'utf-8');
 
     let toAndFromAddress = 'shawn.zhang@razer.com';
     let params = {
@@ -64,12 +64,12 @@ module.exports.sendReminderOnWeekend = (event, context, callback) => {
                 },
                 Text: {
                     Charset: "UTF-8",
-                    Data: "Here's a weekend Remember that puppies are adorable!!"
+                    Data: "This is the message body in text format."
                 }
             },
             Subject: {
                 Charset: "UTF-8",
-                Data: "Woof Garden Reminder"
+                Data: "zVault Weekend Reminder"
             }
         },
         ReplyToAddresses: [toAndFromAddress],
