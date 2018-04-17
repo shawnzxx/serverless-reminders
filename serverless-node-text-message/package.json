@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com-fernando-mc:fernando-mc/serverless-node-text-message-app.git"
+    "url": "git@github.com:shawnzxx/serverless-node-text-message-app.git"
   },
   "keywords": [
     "Serverless",
@@ -21,7 +21,7 @@
     "Page",
     "App"
   ],
-  "author": "Fernando Medina Corey",
+  "author": "Shawn Zhang",
   "license": "MIT",
   "dependencies": {
     "request": "^2.81.0",
